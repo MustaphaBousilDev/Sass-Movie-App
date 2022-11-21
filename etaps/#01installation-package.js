@@ -8,6 +8,12 @@
 #04::@heroicons/react@v1
 --------------------------------
 npm i --save-dev tailwindcss-textshadow
+-----------------------------------------------------
+npm install tailwind-scrollbar-hide
+------------------------------------------------------------
+npm install --save-dev tailwind-scrollbar
+----------------------------------------------------------
+
 
 
 

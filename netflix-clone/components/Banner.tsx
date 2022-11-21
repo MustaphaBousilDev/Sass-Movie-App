@@ -4,6 +4,7 @@ import Image from 'next/image'
 import {baseUrl} from '../constants/movie'
 import {FaPlay} from 'react-icons/fa'
 import { InformationCircleIcon } from '@heroicons/react/solid'
+
 //netflixOriginals? kat3Nii ila kayn bach component dyal banner li findex ma7titch fiha argument dyal netflix Origin maytl3ch
 
 interface Props{
@@ -31,7 +32,7 @@ const Banner = ({netflixOriginals}:Props) => {
           {movie?.overview}
         </p>
         <div className='flex space-x-3'>
-          <button className='bannerButton bg-white text-black'>
+          <button className='bannerButton bg-white text-black '>
             <FaPlay className='h-4 w-4 text-black md:h-7 md:w-7'/>Play
           </button>
           <button className='bannerButton bg-[gray]/70'>
