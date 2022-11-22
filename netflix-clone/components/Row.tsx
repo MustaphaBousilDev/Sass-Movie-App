@@ -15,11 +15,11 @@ const Row = ({title,movies}:Props) => {
   const handleClick=(direction:string)=>{
     setIsMoved(true)
     if(rowRef.current){
-      console.log(rowRef.current)
+      //console.log(rowRef.current)
       const {scrollLeft,clientWidth}=rowRef.current 
-      console.log('gg')
-      console.log(scrollLeft)
-      console.log(clientWidth)
+      //console.log('gg')
+      //console.log(scrollLeft)
+      //console.log(clientWidth)
       const scrollTo=
         direction ==='left'
         ? scrollLeft - clientWidth 
@@ -27,6 +27,9 @@ const Row = ({title,movies}:Props) => {
     rowRef.current.scrollTo({left:scrollTo,behavior:'smooth'})
     }
   }
+  console.log('fuck')
+  //console.log(rowRef.current)
+  //console.log(rowRef.current!.scrollLeft,rowRef.current!.clientWidth)
   return (
     <div className='h-40 space-y-0.5 md:space-y-2'>
       <h2 className='w-56 cursor-pointer text-sm font-semibold text-[#e5e5e5] transition
