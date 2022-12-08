@@ -20,5 +20,7 @@ npm install --save-dev tailwind-scrollbar
 #create project in firbase 
 #cmd (npm install firebase) for install firebase 
 #3awd chof method kidar bach idkhl firebase 
+npm install react-hook-form (for install react hook form)
+-------------------------------------------------------
 
 */
