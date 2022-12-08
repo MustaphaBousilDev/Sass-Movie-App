@@ -2,6 +2,6 @@
 module.exports = {
   reactStrictMode: true,
   images:{
-    domains:['image.tmdb.org'],/*mli dir hade reload server */
+    domains:['image.tmdb.org','rb.gy'],/*mli dir hade reload server */
   },
 }
