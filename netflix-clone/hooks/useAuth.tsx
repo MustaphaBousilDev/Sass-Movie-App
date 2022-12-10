@@ -1,10 +1,7 @@
 import React, { useState,useEffect,useMemo,useContext,createContext, Children } from 'react'
 import {
-    createUserWithEmailAndPassword,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    signOut,
-    User 
+    createUserWithEmailAndPassword,onAuthStateChanged,
+    signInWithEmailAndPassword,signOut,User 
 } from 'firebase/auth'
 
 import { useRouter } from 'next/router'
@@ -36,8 +33,25 @@ export const AuthProvider = ({children} : AuthProviderProps) => {
     const [loading,setLoading]=useState(false)
     const [user,setUser]=useState<User | null>(null /*par difault*/)
     const [error,setError]=useState(null)
-    const [initalLoading,setInitialLoading]=useState(true)
+    const [initialLoading,setInitialLoading]=useState(true)
     const router=useRouter()
+    //Persisting the User
+    useEffect(
+      ()=> onAuthStateChanged(auth,(user)=>{
+        if(user){
+          setUser(user)
+          setLoading(false)
+        }else{
+          setUser(null)
+          setLoading(true)
+          router.push('/login')
+        }
+        setInitialLoading(false)
+      }),[auth]
+    )
+    /////////////////////////////////////////////
+
+
   const signUp=async (email:string,password:string)=>{
     setLoading(true)
     await createUserWithEmailAndPassword(auth,email,password)
@@ -70,11 +84,11 @@ export const AuthProvider = ({children} : AuthProviderProps) => {
 
   const memoedValue=useMemo(()=>({
     user,signUp ,signIn,loading,logout,error
-  }),[user,loading])
+  }),[user,loading])          
   return (
     <AuthContext.Provider value={memoedValue}>
-    {children}
-   </AuthContext.Provider>
+      {!initialLoading && children}
+    </AuthContext.Provider>
   )
 
 }

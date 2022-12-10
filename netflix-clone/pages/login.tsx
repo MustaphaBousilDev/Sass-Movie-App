@@ -68,7 +68,7 @@ const Login = () => {
                 (
                   <p className='p-1 text-[13px] font-light text-orange-500'>
                     Your password must be contain 4 to 60 Character 
-                </p>
+                  </p>
                 )
               }
           </label>
