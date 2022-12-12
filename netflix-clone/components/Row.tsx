@@ -27,7 +27,7 @@ const Row = ({title,movies}:Props) => {
     rowRef.current.scrollTo({left:scrollTo,behavior:'smooth'})
     }
   }
-  console.log('fuck')
+  //console.log('fuck')
   //console.log(rowRef.current)
   //console.log(rowRef.current!.scrollLeft,rowRef.current!.clientWidth)
   return (
