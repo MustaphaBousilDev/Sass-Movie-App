@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import MuiModal from "@mui/material/Modal";
 import { useRecoilValue,useRecoilState } from 'recoil';
-import { modalState } from '../atoms/modalAtom';
+import { modalState, movieState } from '../atoms/modalAtom';
 import { XIcon } from '@heroicons/react/solid';
 import { Movie } from '../typings';
 const Modal = () => {
   
   const [showModal,setShowModal]=useRecoilState(modalState)
-  const [movie,setMovie]=useState<Movie | null>(null)
-  console.log('eoeoeoeoe')
-  console.log(movie)
+  const [movie, setMovie] = useRecoilState(movieState)
+  //console.log(movie)
   const [data,setData]=useState()
   useEffect(()=>{
-    if(!movie){return }
     async function fetchMovie(){
       const data = await fetch(
         `https://api.themoviedb.org/3/${
           movie?.media_type === 'tv' ? 'tv' : 'movie'
         }/${movie?.id}?api_key=${
           process.env.NEXT_PUBLIC_API_KEY
-        }&language=en-US&append_to_response=videos`
-      ).then((response) => response.json())
-      setData(data)
+        }&language=en-US&append_to_response=videos`)
+        .then((response) => response.json())
+        .catch(err => console.log(err.message))
+      //console.log(data)
+      setData(data)  
     }
     fetchMovie()
   },[movie])
+  console.log(data)//dyal useState
   const handleClose=()=>{
     setShowModal(false)
   }
-  console.log('hohohohoh')
-  console.log(data)
   return (
     <MuiModal open={showModal} onClose={handleClose}>
         <>
