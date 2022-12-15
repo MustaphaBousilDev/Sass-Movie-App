@@ -10,6 +10,7 @@ const Modal = () => {
   const [movie, setMovie] = useRecoilState(movieState)
   //console.log(movie)
   const [data,setData]=useState()
+  //console.log(movie)  
   useEffect(()=>{
     async function fetchMovie(){
       const data = await fetch(
