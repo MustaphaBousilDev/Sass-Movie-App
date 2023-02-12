@@ -3,14 +3,16 @@ import MuiModal from "@mui/material/Modal";
 import { useRecoilValue,useRecoilState } from 'recoil';
 import { modalState, movieState } from '../atoms/modalAtom';
 import { XIcon } from '@heroicons/react/solid';
-import { Movie } from '../typings';
+import { Element,Genre } from '../typings';
+import ReactPlayer from 'react-player/lazy';
 const Modal = () => {
   
   const [showModal,setShowModal]=useRecoilState(modalState)
   const [movie, setMovie] = useRecoilState(movieState)
-  //console.log(movie)
-  const [data,setData]=useState()
-  //console.log(movie)  
+  const [trailer,setTrailer]=useState('') 
+  const [genres,setGenres]=useState<Genre[]>([])
+  const [muted,setMuted]=useState(true)
+  
   useEffect(()=>{
     async function fetchMovie(){
       const data = await fetch(
@@ -21,15 +23,23 @@ const Modal = () => {
         }&language=en-US&append_to_response=videos`)
         .then((response) => response.json())
         .catch(err => console.log(err.message))
-      //console.log(data)
-      setData(data)  
+        if(data?.videos){
+          const index=data.videos.results.findIndex((element:Element)=>element.type==='Trailer')
+          setTrailer(data.videos?.results[index]?.key)
+        }
+        if(data?.genres){
+          setGenres(data.genres)
+        }
+      
+      
     }
     fetchMovie()
   },[movie])
-  console.log(data)//dyal useState
+  //console.log(data)//dyal useState
   const handleClose=()=>{
     setShowModal(false)
   }
+  console.log(trailer)
   return (
     <MuiModal open={showModal} onClose={handleClose}>
         <>
@@ -38,8 +48,15 @@ const Modal = () => {
               bg-[#181818] hover:bg-[#181818]'>
             <XIcon className='h-6 w-6 '/>
           </button>
-          <div>
-
+          <div className='relative pt-[56.25%]'>
+            <ReactPlayer 
+              url={`https://www.youtube.com/watch?v=${trailer}`}
+              width="50%"
+              height="50%"
+              style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)'}}
+              playing 
+              muted={muted}
+            />
           </div>
         </>
     </MuiModal>
